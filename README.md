@@ -19,10 +19,12 @@ This script takes a single column CSV file with a header (first row says "name" 
 - genderize_nerrc.py is an older version of genderize.py. If you experience issues with the normal file, try this one, though it is not guaranteed to work and is missing features (feeding API key through command line, catching errors, etc.)
 
 #### Requires:
+Required module can be found in "dep" folder or pypi link (see "Dependencies")
 ```
 pip install Genderize-0.1.5-py3-none-any.whl
 ```
 Python 3.* (Known working: 3.6.1)
+
 
 ##### Dependencies:
 - https://pypi.python.org/pypi/Genderize / https://github.com/SteelPangolin/genderize
