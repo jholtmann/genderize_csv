@@ -7,7 +7,7 @@ Python genderize.io script
 python genderize.py [required: input csv path] [required: output csv path] [optional: API_KEY]
 ```
 
-#### Test file:
+#### Test usage:
 ```
 python genderize.py test/test.csv test/out.csv
 ```
@@ -33,4 +33,4 @@ This script takes a single column CSV file with a header (first row says "name" 
 - Add better command line flags
 
 ##### "Chunks" explanation:
-For some reason, the python genderize client used limits requests to 10 names. To work around this, the code breaks the names down into chunks of 10. This has the unintentional benefit of preventing data loss in case of a crash/server error as the results are written every 10 names. As such, it doesn't seem worth looking into why the 10 name request limit exists, as it is currenty also a feature.
+The Python Genderize client used limits requests to 10 names. To work around this, the code breaks the list of names down into chunks of 10. This approach also has the benefit of preventing data loss in case of a crash/server error as the results are written to the output file every 10 names.
