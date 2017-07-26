@@ -18,7 +18,7 @@ This script takes a single column CSV file with a header (first row says "name" 
 - API_KEY (https://store.genderize.io) is required when requesting more than 1000 names a month
 - genderize_nerrc.py is not in sync with genderize.py, only use if normal file is not working
 
-##### Features:
+#### Features:
 - Bulk processing (tested up to 100,000 names).
 - Estimates remaining time.
 - Writes data after processing 10 names so little data is lost if genderize.io responds with a 502 error, network connection is lost, or request limit is reached.
@@ -33,5 +33,5 @@ This script takes a single column CSV file with a header (first row says "name" 
 - Add support for optionally caching gender responses and searching through them for identical names before asking genderize for the data. This would lower API key request usage.
 - Add better command line flags
 
-##### "Chunks" explanation:
+#### "Chunks" explanation:
 The Python Genderize client used limits requests to 10 names. To work around this, the code breaks the list of names down into chunks of 10. This approach also has the benefit of preventing data loss in case of a crash/server error as the results are written to the output file every 10 names.
