@@ -1,4 +1,4 @@
-# Genderize Python
+# Genderize CSV
 Python genderize.io script
 
 ```sh
