@@ -7,9 +7,14 @@ import time
 import jpyhelper as jpyh
 
 def genderize():
-    if len(sys.argv) != 3:
+    if len(sys.argv) < 3:
         print("Plrease specify input and output files: python genderize.py [input file path] [output file path]")
         sys.exit();
+    
+    if len(sys.argv) == 4:
+        API_KEY = sys.argv[3]
+    else:
+        API_KEY = ""
 
     dir_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
     filename, file_extension = os.path.splitext(sys.argv[2])
@@ -22,7 +27,7 @@ def genderize():
     #Initialize API key
     genderize = Genderize(
         user_agent='GenderizeDocs/0.0',
-        api_key='')
+        api_key=API_KEY)
 
     with open(sys.argv[1], encoding="utf8") as csvfile:
         readCSV = csv.reader(csvfile, delimiter=',')
@@ -59,7 +64,7 @@ def genderize():
                         start = time.time()
                         dataset = genderize.get(chunk)
                     except GenderizeException as e:
-                        print("\n" + e)
+                        print("\n" + str(e))
 
                         if "response not in JSON format" in str(e):
                             if jpyh.query_yes_no("\n---! 502 detected, try again?") == True:

@@ -6,6 +6,8 @@ import time
 
 import jpyhelper as jpyh
 
+API_KEY = ""
+
 def genderize():
     if len(sys.argv) != 3:
         print("Plrease specify input and output files: python genderize.py [input file path] [output file path]")
@@ -22,7 +24,7 @@ def genderize():
     #Initialize API key
     genderize = Genderize(
         user_agent='GenderizeDocs/0.0',
-        api_key='')
+        api_key=API_KEY)
 
     with open(sys.argv[1], encoding="utf8") as csvfile:
         readCSV = csv.reader(csvfile, delimiter=',')

@@ -2,11 +2,20 @@
 
 Python genderize.io script
 
+#### Usage:
 ```sh
-python genderize.py [input csv] [output csv]
+python genderize.py [required: input csv path] [required: output csv path] [optional: API_KEY]
+```
+
+#### Test file:
+```
+python genderize.py test/test.csv test/out.csv
 ```
 
 This script takes a single column CSV file with a header (first row says "name" or other) and feeds the names to genderize.io. It outputs a CSV file with the name, gender, probability, and count of every name.
+
+#### Note:
+- API_KEY (https://store.genderize.io) is required when requesting more than 1000 names a month
 
 ##### Features:
 - Bulk processing (tested up to 100,000 names).
@@ -15,7 +24,7 @@ This script takes a single column CSV file with a header (first row says "name" 
 - Support for genderize.io API key (allows processing of more than 1000 names /mo).
 
 #### Dependencies:
-- https://pypi.python.org/pypi/Genderize (https://github.com/SteelPangolin/genderize)
+- https://pypi.python.org/pypi/Genderize / https://github.com/SteelPangolin/genderize
 
 #### To-do:
 - ~~Catch 502 bad gateway error and retry the request. Currently the program will just catch the error, print it, and exit.~~ DONE (not tested thouroughly enough yet, so genderize_nerrc.py was added in case error catching causes problems)
@@ -23,5 +32,5 @@ This script takes a single column CSV file with a header (first row says "name" 
 - Add support for optionally caching gender responses and searching through them for identical names before asking genderize for the data. This would lower API key request usage.
 - Add better command line flags
 
-##### Note:
+##### "Chunks" explanation:
 For some reason, the python genderize client used limits requests to 10 names. To work around this, the code breaks the names down into chunks of 10. This has the unintentional benefit of preventing data loss in case of a crash/server error as the results are written every 10 names. As such, it doesn't seem worth looking into why the 10 name request limit exists, as it is currenty also a feature.
