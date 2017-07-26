@@ -10,7 +10,7 @@ def genderize():
     if len(sys.argv) < 3:
         print("Plrease specify input and output files: python genderize.py [input file path] [output file path]")
         sys.exit();
-    
+
     if len(sys.argv) == 4:
         API_KEY = sys.argv[3]
     else:
@@ -29,7 +29,7 @@ def genderize():
         user_agent='GenderizeDocs/0.0',
         api_key=API_KEY)
 
-    with open(sys.argv[1], encoding="utf8") as csvfile:
+    with open(sys.argv[1], 'r', encoding="utf8") as csvfile:
         readCSV = csv.reader(csvfile, delimiter=',')
         names = []
         for row in readCSV:
@@ -62,7 +62,10 @@ def genderize():
                 while True:
                     try:
                         start = time.time()
-                        dataset = genderize.get(chunk)
+                        temp = []
+                        for c in chunk:
+                            temp.append(str(c[0]).strip("\n"))
+                        dataset = genderize.get(temp)
                     except GenderizeException as e:
                         print("\n" + str(e))
 
