@@ -16,6 +16,7 @@ This script takes a single column CSV file with a header (first row says "name" 
 
 #### Note:
 - API_KEY (https://store.genderize.io) is required when requesting more than 1000 names a month
+- genderize_nerrc.py is not in sync with genderize.py, only use if normal file is not working
 
 ##### Features:
 - Bulk processing (tested up to 100,000 names).
