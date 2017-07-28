@@ -23,6 +23,29 @@ required arguments:
                         Output file name
 ```
 
+#### Beta usage:
+```
+genderize_beta.py [-h] -i INPUT -o OUTPUT [-k KEY] [-c] [-a] [-nh]
+```
+
+```
+optional arguments:
+  -h, --help            show this help message and exit
+  -k KEY, --key KEY     API key
+  -c, --catch           Try to gracefully handle server 502 errors
+  -a, --auto            Automatically complete gender for identical names
+  -nh, --noheader       Input has no header row
+
+required arguments:
+  -i INPUT, --input INPUT
+                        Input file name
+  -o OUTPUT, --output OUTPUT
+                        Output file name
+```
+
+##### Beta features:
+- Only requests unique names from genderize.io, autocompletes the rest
+
 #### Test usage:
 ```
 python genderize.py -i test/test.csv -o test/out.csv --catch
@@ -50,9 +73,9 @@ Python 3.* (Known working: 3.6.1)
 
 #### To-do:
 - Add ability to search multi-column CSV file for column with specific header.
-- Add support for optionally caching gender responses and searching through them for identical names before asking genderize for the data. This would lower API key request usage.
 - Add support for alternate output formats.
 - Add support for using file as a module.
+- ~~Add support for optionally caching gender responses and searching through them for identical names before asking genderize for the data. This would lower API key request usage.~~ BETA
 - ~~Catch 502 bad gateway error and retry the request. Currently the program will just catch the error, print it, and exit.~~ DONE
 - ~~Add better command line flags~~ DONE
 

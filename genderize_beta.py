@@ -106,7 +106,10 @@ def genderize(args):
             writer = csv.writer(f)
             writer.writerow(list(["names", "gender", "probability", "count"]))
             chunks_len = len(chunks)
+            stopped = False
             for index, chunk in enumerate(chunks):
+                if stopped:
+                    break
                 while True:
                     try:
                         start = time.time()
@@ -126,14 +129,12 @@ def genderize(args):
                             if jpyh.query_yes_no("\n---!! 502 detected, try again?") == True:
                                 print("Exiting...\n")
                                 pass
-                            else:
-                                break
-                        if "Invalid API key" in str(e) and args.catch == True:
+                        elif "Invalid API key" in str(e) and args.catch == True:
                             print("\n---!! Error, invalid API key! Check log file for details.\n")
-                            sys.exit()
-
-                        print("\n---!! GenderizeException - You probably exceeded the request limit, please add or purchase a API key. Check log file for details.\n")
-                        sys.exit()
+                        else:
+                            print("\n---!! GenderizeException - You probably exceeded the request limit, please add or purchase a API key. Check log file for details.\n")
+                        stopped = True
+                        break
 
                     response_time.append(time.time() - start)
                     print("Processed chunk " + str(index + 1) + " of " + str(chunks_len) + " -- Time remaining (est.): " + \
@@ -146,6 +147,22 @@ def genderize(args):
                 if args.auto == True:
                     print("Completing identical names...")
                     #AUTOCOMPLETE NAMES
+
+                    #Create master dict
+                    gender_dict = dict()
+                    for response in gender_responses:
+                        for d in response:
+                            gender_dict[d.get("name")] = [d.get("gender"), d.get("probability"), d.get("count")]
+
+                    filename, file_extension = os.path.splitext(ofile)
+                    with open(filename, 'w', newline='', encoding="utf8") as f:
+                        writer = csv.writer(f)
+                        writer.writerow(list(["names", "gender", "probability", "count"]))
+
+                        for name in o_names:
+                            data = gender_dict.get(name)
+                            writer.writerow([name, data[0], data[1], data[2]])
+
                 else:
                     print("Done!")
 

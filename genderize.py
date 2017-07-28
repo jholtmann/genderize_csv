@@ -72,6 +72,7 @@ def genderize(args):
         if args.noheader == False:
             names.pop(0) #Remove header
 
+        #Unnest list of names
         o_names = list()
         for l in names:
             for b in l:
