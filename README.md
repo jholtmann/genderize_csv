@@ -44,7 +44,7 @@ required arguments:
 ```
 
 ##### Beta features:
-- Only requests unique names from genderize.io, autocompletes the rest
+- Auto flag: Only requests unique names from genderize.io, autocompletes the rest. May significantly lower API key usage.
 
 #### Test usage:
 ```
