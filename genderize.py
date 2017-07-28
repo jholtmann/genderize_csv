@@ -8,6 +8,12 @@ import logging
 
 import jpyhelper as jpyh
 
+'''
+Copyright (c) 2017 Jonathan Holtmann, MIT License
+
+https://github.com/jholtmann/genderize_csv
+'''
+
 def genderize(args):
     print(args)
 
