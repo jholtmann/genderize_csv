@@ -25,10 +25,10 @@ required arguments:
 ```
 
 #### Flag details
-- key:       specify API key [required for 1000+ names]
-- catch:     try to gracefully catch and handle errors [recommended]
-- auto:      only request genders for unique names, then autocomplete the duplicates. May significantly lower API usage (by 50% in big test file, for example) [see "Note" for more info]
-- noheader:  use if input file has no header row
+- _key_:       specify API key [required for 1000+ names]
+- _catch_:     try to gracefully catch and handle errors [recommended]
+- _auto_:      only request genders for unique names, then autocomplete the duplicates. May significantly lower API usage (by 50% in big test file, for example) [see "Note" for more info]
+- _noheader_:  use if input file has no header row
 
 ### Test usage:
 ```
