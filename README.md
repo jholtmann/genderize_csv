@@ -4,7 +4,20 @@ Python genderize.io script
 
 #### Usage:
 ```sh
-python genderize.py [required: input csv path] [required: output csv path] [optional: API_KEY]
+python genderize.py [-h] -i INPUT -o OUTPUT [-k KEY] [-c]
+```
+
+```
+optional arguments:
+  -h, --help            show this help message and exit
+  -k KEY, --key KEY     API key
+  -c, --catch           Try to gracefully handle server 502 errors
+
+required named arguments:
+  -i INPUT, --input INPUT
+                        Input file name
+  -o OUTPUT, --output OUTPUT
+                        Output file name
 ```
 
 #### Test usage:
@@ -15,8 +28,8 @@ python genderize.py test/test.csv test/out.csv
 This script takes a single column CSV file with a header (first row says "name" or other) and feeds the names to genderize.io. It outputs a CSV file with the name, gender, probability, and count of every name.
 
 #### Note:
-- API_KEY (https://store.genderize.io) is required when requesting more than 1000 names a month
-- genderize_nerrc.py is not in sync with genderize.py, only use if normal file is not working
+- API_KEY (https://store.genderize.io) is required when requesting more than 1000 names a month.
+- genderize_beta.py may be unstable and is meant for developing and testing new features.
 
 ##### Features:
 - Bulk processing (tested up to 100,000 names).
@@ -28,10 +41,11 @@ This script takes a single column CSV file with a header (first row says "name" 
 - https://pypi.python.org/pypi/Genderize / https://github.com/SteelPangolin/genderize
 
 #### To-do:
-- ~~Catch 502 bad gateway error and retry the request. Currently the program will just catch the error, print it, and exit.~~ DONE (not tested thouroughly enough yet, so genderize_nerrc.py was added in case error catching causes problems)
 - Add ability to search multi-column CSV file for column with specific header.
 - Add support for optionally caching gender responses and searching through them for identical names before asking genderize for the data. This would lower API key request usage.
-- Add better command line flags
+- ~~Catch 502 bad gateway error and retry the request. Currently the program will just catch the error, print it, and exit.~~ DONE
+- ~~Add better command line flags~~ DONE
+
 
 ##### "Chunks" explanation:
 The Python Genderize client used limits requests to 10 names. To work around this, the code breaks the list of names down into chunks of 10. This approach also has the benefit of preventing data loss in case of a crash/server error as the results are written to the output file every 10 names.
