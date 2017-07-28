@@ -72,9 +72,14 @@ def genderize(args):
         if args.noheader == False:
             names.pop(0) #Remove header
 
-        print("--- Read CSV with " + str(len(names)) + " names")
+        o_names = list()
+        for l in names:
+            for b in l:
+                o_names.append(b)
 
-        chunks = list(jpyh.splitlist(names, 10));
+        print("--- Read CSV with " + str(len(o_names)) + " names")
+
+        chunks = list(jpyh.splitlist(o_names, 10));
 
         print("--- Processed into " + str(len(chunks)) + " chunks")
 
@@ -97,18 +102,11 @@ def genderize(args):
                 while True:
                     try:
                         start = time.time()
-                        temp = []
-                        if args.nostrip == True:
-                            temp = chunk
-                        else:
-                            for c in chunk:
-                                temp.append(str(c[0]).strip("\n"))
-
 
                         if key_present:
-                            dataset = genderize.get(temp)
+                            dataset = genderize.get(chunk)
                         else:
-                            dataset = Genderize().get(temp)
+                            dataset = Genderize().get(chunk)
                     except GenderizeException as e:
                         #print("\n" + str(e))
                         logger.error(e)
@@ -143,7 +141,6 @@ if __name__ == "__main__":
     required.add_argument('-o','--output', help='Output file name', required=True)
     parser.add_argument('-k','--key', help='API key', required=False, default="NO_API")
     parser.add_argument('-c','--catch', help='Try to gracefully handle server 502 errors', required=False, action='store_true', default=True)
-    parser.add_argument('-ns','--nostrip', help='Do not strip blank lines from input csv', required=False, action='store_true', default=False)
     parser.add_argument('-nh','--noheader', help='Input has no header row', required=False, action='store_true', default=False)
 
     genderize(parser.parse_args())
