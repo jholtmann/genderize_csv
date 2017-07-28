@@ -52,7 +52,7 @@ python genderize.py -i test/test.csv -o test/out.csv --catch
 ```
 
 ### Note:
-- API_KEY (https://store.genderize.io) is required when requesting more than 1000 names a month.
+- API key (https://store.genderize.io) is required when requesting more than 1000 names a month.
 - genderize_beta.py may be unstable and is meant for developing and testing new features.
 
 ### Requires:
