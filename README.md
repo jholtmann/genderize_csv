@@ -52,6 +52,8 @@ Python 3.* (Known working: 3.6.1)
 #### To-do:
 - Add ability to search multi-column CSV file for column with specific header.
 - Add support for optionally caching gender responses and searching through them for identical names before asking genderize for the data. This would lower API key request usage.
+- Add support for alternate output formats.
+- Add support for using file as a module.
 - ~~Catch 502 bad gateway error and retry the request. Currently the program will just catch the error, print it, and exit.~~ DONE
 - ~~Add better command line flags~~ DONE
 
