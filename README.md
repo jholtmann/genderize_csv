@@ -12,6 +12,7 @@ optional arguments:
   -h, --help            show this help message and exit
   -k KEY, --key KEY     API key
   -c, --catch           Try to gracefully handle server 502 errors
+  -ns, --nostrip        Do not strip blank lines from input csv
 
 required named arguments:
   -i INPUT, --input INPUT
@@ -22,7 +23,7 @@ required named arguments:
 
 #### Test usage:
 ```
-python genderize.py test/test.csv test/out.csv
+python genderize.py -i test/test.csv -o test/out.csv --catch
 ```
 
 This script takes a single column CSV file with a header (first row says "name" or other) and feeds the names to genderize.io. It outputs a CSV file with the name, gender, probability, and count of every name.

@@ -91,8 +91,13 @@ def genderize(args):
                     try:
                         start = time.time()
                         temp = []
-                        for c in chunk:
-                            temp.append(str(c[0]).strip("\n"))
+                        if args.nostrip == True:
+                            temp = chunk
+                        else:
+                            for c in chunk:
+                                temp.append(str(c[0]).strip("\n"))
+
+
                         if key_present:
                             dataset = genderize.get(temp)
                         else:
@@ -131,5 +136,6 @@ if __name__ == "__main__":
     required.add_argument('-o','--output', help='Output file name', required=True)
     parser.add_argument('-k','--key', help='API key', required=False, default="NO_API")
     parser.add_argument('-c','--catch', help='Try to gracefully handle server 502 errors', required=False, action='store_true', default=True)
+    parser.add_argument('-ns','--nostrip', help='Do not strip blank lines from input csv', required=False, action='store_true', default=False)
 
     genderize(parser.parse_args())
