@@ -37,7 +37,7 @@ python genderize.py -i test/test.csv -o test/out.csv --catch
 
 ### Note:
 - API key (https://store.genderize.io) is required when requesting more than 1000 names a month.
-- Warning: If an error occurs while executing script with the --auto argument, no name-matching will occur. The .tmp file will have all the unique names processed to that point, but the script does not yet support picking up from where it was where an error occured! If an error occurs while processing names without the --auto argument, you can just remove the processed names from the input file and continue, this is not possible when using the --auto argument.
+- Warning: If an error occurs while executing script with the _auto_ argument, no name-matching will occur. The _.tmp_ file will have all the unique names processed to that point, but the script does not yet support picking up from where it was where an error occured! If an error occurs while processing names without the _auto_ argument, you can just remove the processed names from the input file and continue, this is not possible when using the _auto_ argument.
 
 ### Requires:
 Required module can be found in "dep" folder or pypi link (see "Dependencies")
@@ -50,20 +50,19 @@ Python 3.* (Known working: 3.6.1)
 - https://pypi.python.org/pypi/Genderize / https://github.com/SteelPangolin/genderize
 
 ### Features:
-- Bulk processing (tested with 600,000+ names).
-- Estimates remaining time.
-- Writes data after processing 10 names so little data is lost if genderize.io responds with a 502 error, network connection is lost, or request limit is reached.
+- Bulk processing (tested with 600,000+ names)
+- Estimates remaining time
+- Writes data after processing 10 names so little data is lost if an error occurs 
 - Support for genderize.io API key (allows processing of more than 1000 names /mo).
 
 ### To-do:
-- Add ability to search multi-column CSV file for column with specific header.
-- Add support for alternate output formats.
-- Add support for using file as a module.
-- Add ability to pick up name processing from data in .tmp file if error occurs while using --auto argument
+- Add ability to search multi-column CSV file for column with specific header [easy]
+- Add support for alternate output formats [moderate]
+- Add support for using file as a module [easy]
+- Add ability to pick up name processing from data in .tmp file if error occurs while using _auto_ argument [hard]
 - ~~Add support for optionally caching gender responses and searching through them for identical names before asking genderize for the data. This would lower API key request usage.~~ DONE
 - ~~Catch 502 bad gateway error and retry the request. Currently the program will just catch the error, print it, and exit.~~ DONE
 - ~~Add better command line flags~~ DONE
-
 
 #### "Chunks" explanation:
 The Python Genderize client used limits requests to 10 names. To work around this, the code breaks the list of names down into chunks of 10. This approach also has the benefit of preventing data loss in case of a crash/server error as the results are written to the output file every 10 names.
