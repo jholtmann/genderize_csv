@@ -63,7 +63,8 @@ def genderize(args):
         for row in readCSV: #Read CSV into names list
             names.append(row)
 
-        names.pop(0) #Remove header
+        if args.noheader == False:
+            names.pop(0) #Remove header
 
         print("--- Read CSV with " + str(len(names)) + " names")
 
@@ -137,5 +138,6 @@ if __name__ == "__main__":
     parser.add_argument('-k','--key', help='API key', required=False, default="NO_API")
     parser.add_argument('-c','--catch', help='Try to gracefully handle server 502 errors', required=False, action='store_true', default=True)
     parser.add_argument('-ns','--nostrip', help='Do not strip blank lines from input csv', required=False, action='store_true', default=False)
+    parser.add_argument('-nh','--noheader', help='Input has no header row', required=False, action='store_true', default=False)
 
     genderize(parser.parse_args())

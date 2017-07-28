@@ -2,11 +2,11 @@
 
 **Python genderize.io script**
 
-This script takes a single column CSV file with a header (first row says "name" or other) and feeds the names to genderize.io. It outputs a CSV file with the name, gender, probability, and count of every name.
+This script takes a single column CSV file with a header and feeds the names to genderize.io. It outputs a CSV file with the name, gender, probability, and count of every name.
 
 #### Usage:
 ```sh
-python genderize.py [-h] -i INPUT -o OUTPUT [-k KEY] [-c]
+python genderize.py [-h] -i INPUT -o OUTPUT [-k KEY] [-c] [-ns] [-nh]
 ```
 
 ```
@@ -15,6 +15,7 @@ optional arguments:
   -k KEY, --key KEY     API key
   -c, --catch           Try to gracefully handle server 502 errors
   -ns, --nostrip        Do not strip blank lines from input csv
+  -nh, --noheader		Input has no header row
 
 required named arguments:
   -i INPUT, --input INPUT
