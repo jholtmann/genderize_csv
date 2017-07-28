@@ -72,9 +72,18 @@ def genderize(args):
         if args.noheader == False:
             names.pop(0) #Remove header
 
-        print("--- Read CSV with " + str(len(names)) + " names")
+        o_names = list()
+        for l in names:
+            for b in l:
+                o_names.append(b)
 
-        chunks = list(jpyh.splitlist(names, 10));
+        if args.auto == True:
+            uniq_names = list(set(o_names))
+            chunks = list(jpyh.splitlist(uniq_names, 10));
+            print("--- Read CSV with " + str(len(names)) + " names. " + str(len(uniq_names)) + " unique.")
+        else:
+            chunks = list(jpyh.splitlist(names, 10));
+            print("--- Read CSV with " + str(len(names)) + " names")
 
         print("--- Processed into " + str(len(chunks)) + " chunks")
 
@@ -88,7 +97,11 @@ def genderize(args):
                 sys.exit()
             print("\n")
 
+        if args.auto == True:
+            ofile = ofile + ".tmp"
+
         response_time = [];
+        gender_responses = list()
         with open(ofile, 'w', newline='', encoding="utf8") as f:
             writer = csv.writer(f)
             writer.writerow(list(["names", "gender", "probability", "count"]))
@@ -97,18 +110,13 @@ def genderize(args):
                 while True:
                     try:
                         start = time.time()
-                        temp = []
-                        if args.nostrip == True:
-                            temp = chunk
-                        else:
-                            for c in chunk:
-                                temp.append(str(c[0]).strip("\n"))
-
 
                         if key_present:
-                            dataset = genderize.get(temp)
+                            dataset = genderize.get(chunk)
                         else:
-                            dataset = Genderize().get(temp)
+                            dataset = Genderize().get(chunk)
+
+                        gender_responses.append(dataset)
                     except GenderizeException as e:
                         #print("\n" + str(e))
                         logger.error(e)
@@ -135,6 +143,13 @@ def genderize(args):
                         writer.writerow(data.values())
                     break
 
+                if args.auto == True:
+                    print("Completing identical names...")
+                    #AUTOCOMPLETE NAMES
+                else:
+                    print("Done!")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Bulk genderize.io script')
     required = parser.add_argument_group('required arguments')
@@ -143,7 +158,7 @@ if __name__ == "__main__":
     required.add_argument('-o','--output', help='Output file name', required=True)
     parser.add_argument('-k','--key', help='API key', required=False, default="NO_API")
     parser.add_argument('-c','--catch', help='Try to gracefully handle server 502 errors', required=False, action='store_true', default=True)
-    parser.add_argument('-ns','--nostrip', help='Do not strip blank lines from input csv', required=False, action='store_true', default=False)
+    parser.add_argument('-a','--auto', help='Automatically complete gender for identical names', required=False, action='store_true', default=False)
     parser.add_argument('-nh','--noheader', help='Input has no header row', required=False, action='store_true', default=False)
 
     genderize(parser.parse_args())
