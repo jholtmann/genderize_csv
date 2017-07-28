@@ -38,7 +38,6 @@ pip install Genderize-0.1.5-py3-none-any.whl
 ```
 Python 3.* (Known working: 3.6.1)
 
-
 ##### Dependencies:
 - https://pypi.python.org/pypi/Genderize / https://github.com/SteelPangolin/genderize
 
