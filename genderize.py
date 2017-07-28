@@ -174,7 +174,7 @@ if __name__ == "__main__":
     required.add_argument('-i','--input', help='Input file name', required=True)
     required.add_argument('-o','--output', help='Output file name', required=True)
     parser.add_argument('-k','--key', help='API key', required=False, default="NO_API")
-    parser.add_argument('-c','--catch', help='Try to gracefully handle errors', required=False, action='store_true', default=True)
+    parser.add_argument('-c','--catch', help='Try to handle errors gracefully', required=False, action='store_true', default=True)
     parser.add_argument('-a','--auto', help='Automatically complete gender for identical names', required=False, action='store_true', default=False)
     parser.add_argument('-nh','--noheader', help='Input has no header row', required=False, action='store_true', default=False)
 
