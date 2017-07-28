@@ -17,7 +17,7 @@ optional arguments:
   -ns, --nostrip        Do not strip blank lines from input csv
   -nh, --noheader		Input has no header row
 
-required named arguments:
+required arguments:
   -i INPUT, --input INPUT
                         Input file name
   -o OUTPUT, --output OUTPUT

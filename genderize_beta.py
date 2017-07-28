@@ -131,7 +131,7 @@ def genderize(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Bulk genderize.io script')
-    required = parser.add_argument_group('required named arguments')
+    required = parser.add_argument_group('required arguments')
 
     required.add_argument('-i','--input', help='Input file name', required=True)
     required.add_argument('-o','--output', help='Output file name', required=True)
