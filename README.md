@@ -14,7 +14,7 @@ optional arguments:
   -h, --help            show this help message and exit
   -k KEY, --key KEY     API key
   -c, --catch           Try to gracefully handle server 502 errors
-  -nh, --noheader		Input has no header row
+  -nh, --noheader       Input has no header row
 
 required arguments:
   -i INPUT, --input INPUT
