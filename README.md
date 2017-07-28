@@ -13,26 +13,7 @@ python genderize.py [-h] -i INPUT -o OUTPUT [-k KEY] [-c] [-ns] [-nh]
 optional arguments:
   -h, --help            show this help message and exit
   -k KEY, --key KEY     API key
-  -c, --catch           Try to gracefully handle server 502 errors
-  -nh, --noheader       Input has no header row
-
-required arguments:
-  -i INPUT, --input INPUT
-                        Input file name
-  -o OUTPUT, --output OUTPUT
-                        Output file name
-```
-
-### Beta usage:
-```
-genderize_beta.py [-h] -i INPUT -o OUTPUT [-k KEY] [-c] [-a] [-nh]
-```
-
-```
-optional arguments:
-  -h, --help            show this help message and exit
-  -k KEY, --key KEY     API key
-  -c, --catch           Try to gracefully handle server 502 errors
+  -c, --catch           Try to handle errors gracefully
   -a, --auto            Automatically complete gender for identical names
   -nh, --noheader       Input has no header row
 
@@ -43,8 +24,11 @@ required arguments:
                         Output file name
 ```
 
-#### Beta features:
-- Auto flag: Only requests unique names from genderize.io, autocompletes the rest. May significantly lower API key usage.
+#### Flag details
+- key:       specify API key [required for 1000+ names]
+- catch:     try to gracefully catch and handle errors [recommended]
+- auto:      only request genders for unique names, then autocomplete the duplicates. May significantly lower API usage (by 50% in big test file, for example) [see "Note" for more info]
+- noheader:  use if input file has no header row
 
 ### Test usage:
 ```
@@ -53,7 +37,7 @@ python genderize.py -i test/test.csv -o test/out.csv --catch
 
 ### Note:
 - API key (https://store.genderize.io) is required when requesting more than 1000 names a month.
-- genderize_beta.py may be unstable and is meant for developing and testing new features.
+- Warning: If an error occurs while executing script with the --auto argument, no name-matching will occur. The .tmp file will have all the unique names processed to that point, but the script does not yet support picking up from where it was where an error occured! If an error occurs while processing names without the --auto argument, you can just remove the processed names from the input file and continue, this is not possible when using the --auto argument.
 
 ### Requires:
 Required module can be found in "dep" folder or pypi link (see "Dependencies")
@@ -66,7 +50,7 @@ Python 3.* (Known working: 3.6.1)
 - https://pypi.python.org/pypi/Genderize / https://github.com/SteelPangolin/genderize
 
 ### Features:
-- Bulk processing (tested with 100,000+ names).
+- Bulk processing (tested with 600,000+ names).
 - Estimates remaining time.
 - Writes data after processing 10 names so little data is lost if genderize.io responds with a 502 error, network connection is lost, or request limit is reached.
 - Support for genderize.io API key (allows processing of more than 1000 names /mo).
@@ -75,7 +59,8 @@ Python 3.* (Known working: 3.6.1)
 - Add ability to search multi-column CSV file for column with specific header.
 - Add support for alternate output formats.
 - Add support for using file as a module.
-- ~~Add support for optionally caching gender responses and searching through them for identical names before asking genderize for the data. This would lower API key request usage.~~ BETA
+- Add ability to pick up name processing from data in .tmp file if error occurs while using --auto argument
+- ~~Add support for optionally caching gender responses and searching through them for identical names before asking genderize for the data. This would lower API key request usage.~~ DONE
 - ~~Catch 502 bad gateway error and retry the request. Currently the program will just catch the error, print it, and exit.~~ DONE
 - ~~Add better command line flags~~ DONE
 
