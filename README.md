@@ -1,6 +1,8 @@
 # Genderize CSV
 
-Python genderize.io script
+**Python genderize.io script**
+
+This script takes a single column CSV file with a header (first row says "name" or other) and feeds the names to genderize.io. It outputs a CSV file with the name, gender, probability, and count of every name.
 
 #### Usage:
 ```sh
@@ -25,8 +27,6 @@ required named arguments:
 ```
 python genderize.py -i test/test.csv -o test/out.csv --catch
 ```
-
-This script takes a single column CSV file with a header (first row says "name" or other) and feeds the names to genderize.io. It outputs a CSV file with the name, gender, probability, and count of every name.
 
 #### Note:
 - API_KEY (https://store.genderize.io) is required when requesting more than 1000 names a month.
