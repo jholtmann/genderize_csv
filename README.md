@@ -31,14 +31,22 @@ This script takes a single column CSV file with a header (first row says "name" 
 - API_KEY (https://store.genderize.io) is required when requesting more than 1000 names a month.
 - genderize_beta.py may be unstable and is meant for developing and testing new features.
 
-##### Features:
-- Bulk processing (tested up to 100,000 names).
+#### Requires:
+Required module can be found in "dep" folder or pypi link (see "Dependencies")
+```
+pip install Genderize-0.1.5-py3-none-any.whl
+```
+Python 3.* (Known working: 3.6.1)
+
+
+##### Dependencies:
+- https://pypi.python.org/pypi/Genderize / https://github.com/SteelPangolin/genderize
+
+#### Features:
+- Bulk processing (tested with 100,000+ names).
 - Estimates remaining time.
 - Writes data after processing 10 names so little data is lost if genderize.io responds with a 502 error, network connection is lost, or request limit is reached.
 - Support for genderize.io API key (allows processing of more than 1000 names /mo).
-
-#### Dependencies:
-- https://pypi.python.org/pypi/Genderize / https://github.com/SteelPangolin/genderize
 
 #### To-do:
 - Add ability to search multi-column CSV file for column with specific header.
